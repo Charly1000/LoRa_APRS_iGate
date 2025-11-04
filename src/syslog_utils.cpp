@@ -36,7 +36,8 @@ namespace SYSLOG_Utils {
         if (Config.syslog.active && WiFi.status() == WL_CONNECTED) {
             String syslogPacket = "<165>1 - ";
             syslogPacket.concat(Config.callsign);
-            syslogPacket.concat(" CA2RXU_LoRa_iGate_");
+            syslogPacket.concat(" ");
+            syslogPacket.concat(Utils::replacePlaceholders(Config.customText.syslogIdentifier));
             syslogPacket.concat(versionNumber);
             syslogPacket.concat(" - - - "); //RFC5424 The Syslog Protocol
 

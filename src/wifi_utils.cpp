@@ -91,7 +91,7 @@ namespace WIFI_Utils {
             startAP = true;
         } else {
             uint8_t wifiCounter = 0;
-            String hostName = "iGATE-" + Config.callsign;
+            String hostName = Utils::replacePlaceholders(Config.customText.wifiHostnamePrefix) + Config.callsign;
             WiFi.setHostname(hostName.c_str());
             WiFi.mode(WIFI_STA);
             WiFi.disconnect();

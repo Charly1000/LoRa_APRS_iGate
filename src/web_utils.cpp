@@ -293,6 +293,24 @@ namespace WEB_Utils {
         Config.ntp.server                   = getParamStringSafe("ntp.server", Config.ntp.server);
         Config.ntp.gmtCorrection            = getParamFloatSafe("ntp.gmtCorrection", Config.ntp.gmtCorrection);
 
+        // Custom Text & Branding
+        Config.customText.bootLine1         = getParamStringSafe("customText.bootLine1", Config.customText.bootLine1);
+        Config.customText.bootLine2         = getParamStringSafe("customText.bootLine2", Config.customText.bootLine2);
+        Config.customText.bootLine3         = getParamStringSafe("customText.bootLine3", Config.customText.bootLine3);
+        Config.customText.bootLine4         = getParamStringSafe("customText.bootLine4", Config.customText.bootLine4);
+        Config.customText.bootLine5         = getParamStringSafe("customText.bootLine5", Config.customText.bootLine5);
+        Config.customText.bootLine6         = getParamStringSafe("customText.bootLine6", Config.customText.bootLine6);
+        Config.customText.bootLine7         = getParamStringSafe("customText.bootLine7", Config.customText.bootLine7);
+        Config.customText.listeningText     = getParamStringSafe("customText.listeningText", Config.customText.listeningText);
+        Config.customText.aprsIsAuthSoftware = getParamStringSafe("customText.aprsIsAuthSoftware", Config.customText.aprsIsAuthSoftware);
+        Config.customText.queryResponseId   = getParamStringSafe("customText.queryResponseId", Config.customText.queryResponseId);
+        Config.customText.syslogIdentifier  = getParamStringSafe("customText.syslogIdentifier", Config.customText.syslogIdentifier);
+        Config.customText.wifiHostnamePrefix = getParamStringSafe("customText.wifiHostnamePrefix", Config.customText.wifiHostnamePrefix);
+        Config.customText.epaperInitText    = getParamStringSafe("customText.epaperInitText", Config.customText.epaperInitText);
+        Config.customText.showVersion       = request->hasParam("customText.showVersion", true);
+        Config.customText.showCallsign      = request->hasParam("customText.showCallsign", true);
+        Config.customText.showDate          = request->hasParam("customText.showDate", true);
+
         Config.rememberStationTime          = getParamIntSafe("other.rememberStationTime", Config.rememberStationTime);
 
         Config.backupDigiMode               = request->hasParam("other.backupDigiMode", true);

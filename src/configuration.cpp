@@ -154,6 +154,24 @@ bool Configuration::writeFile() {
         data["ntp"]["server"]                       = ntp.server;
         data["ntp"]["gmtCorrection"]                = ntp.gmtCorrection;
 
+        // Custom Text & Branding
+        data["customText"]["bootLine1"]             = customText.bootLine1;
+        data["customText"]["bootLine2"]             = customText.bootLine2;
+        data["customText"]["bootLine3"]             = customText.bootLine3;
+        data["customText"]["bootLine4"]             = customText.bootLine4;
+        data["customText"]["bootLine5"]             = customText.bootLine5;
+        data["customText"]["bootLine6"]             = customText.bootLine6;
+        data["customText"]["bootLine7"]             = customText.bootLine7;
+        data["customText"]["listeningText"]         = customText.listeningText;
+        data["customText"]["aprsIsAuthSoftware"]    = customText.aprsIsAuthSoftware;
+        data["customText"]["queryResponseId"]       = customText.queryResponseId;
+        data["customText"]["syslogIdentifier"]      = customText.syslogIdentifier;
+        data["customText"]["wifiHostnamePrefix"]    = customText.wifiHostnamePrefix;
+        data["customText"]["epaperInitText"]        = customText.epaperInitText;
+        data["customText"]["showVersion"]           = customText.showVersion;
+        data["customText"]["showCallsign"]          = customText.showCallsign;
+        data["customText"]["showDate"]              = customText.showDate;
+
         data["other"]["rebootMode"]                 = rebootMode;
         data["other"]["rebootModeTime"]             = rebootModeTime;
 
@@ -378,6 +396,40 @@ bool Configuration::readFile() {
         ntp.server                      = data["ntp"]["server"] | "pool.ntp.org";
         ntp.gmtCorrection               = data["ntp"]["gmtCorrection"] | 0.0;
 
+        // Custom Text & Branding - Load with defaults
+        if (!data["customText"].containsKey("bootLine1") ||
+            !data["customText"].containsKey("bootLine2") ||
+            !data["customText"].containsKey("bootLine3") ||
+            !data["customText"].containsKey("bootLine4") ||
+            !data["customText"].containsKey("bootLine5") ||
+            !data["customText"].containsKey("bootLine6") ||
+            !data["customText"].containsKey("bootLine7") ||
+            !data["customText"].containsKey("listeningText") ||
+            !data["customText"].containsKey("aprsIsAuthSoftware") ||
+            !data["customText"].containsKey("queryResponseId") ||
+            !data["customText"].containsKey("syslogIdentifier") ||
+            !data["customText"].containsKey("wifiHostnamePrefix") ||
+            !data["customText"].containsKey("epaperInitText") ||
+            !data["customText"].containsKey("showVersion") ||
+            !data["customText"].containsKey("showCallsign") ||
+            !data["customText"].containsKey("showDate")) needsRewrite = true;
+        customText.bootLine1            = data["customText"]["bootLine1"] | " LoRa APRS";
+        customText.bootLine2            = data["customText"]["bootLine2"] | "";
+        customText.bootLine3            = data["customText"]["bootLine3"] | "";
+        customText.bootLine4            = data["customText"]["bootLine4"] | "   ( iGATE & DIGI )";
+        customText.bootLine5            = data["customText"]["bootLine5"] | "";
+        customText.bootLine6            = data["customText"]["bootLine6"] | "";
+        customText.bootLine7            = data["customText"]["bootLine7"] | "  CA2RXU  {version}";
+        customText.listeningText        = data["customText"]["listeningText"] | "     listening...";
+        customText.aprsIsAuthSoftware   = data["customText"]["aprsIsAuthSoftware"] | "CA2RXUiGate";
+        customText.queryResponseId      = data["customText"]["queryResponseId"] | "CA2RXU_LoRa_iGate";
+        customText.syslogIdentifier     = data["customText"]["syslogIdentifier"] | "CA2RXU_LoRa_iGate_";
+        customText.wifiHostnamePrefix   = data["customText"]["wifiHostnamePrefix"] | "iGATE-";
+        customText.epaperInitText       = data["customText"]["epaperInitText"] | "LoRa APRS iGate Initialising...";
+        customText.showVersion          = data["customText"]["showVersion"] | true;
+        customText.showCallsign         = data["customText"]["showCallsign"] | true;
+        customText.showDate             = data["customText"]["showDate"] | true;
+
         if (!data["other"].containsKey("rebootMode") ||
             !data["other"].containsKey("rebootModeTime")) needsRewrite = true;
         rebootMode                      = data["other"]["rebootMode"] | false;
@@ -523,6 +575,24 @@ void Configuration::setDefaultValues() {
 
     ntp.server                      = "pool.ntp.org";
     ntp.gmtCorrection               = 0.0;
+
+    // Custom Text & Branding defaults
+    customText.bootLine1            = " LoRa APRS";
+    customText.bootLine2            = "";
+    customText.bootLine3            = "";
+    customText.bootLine4            = "   ( iGATE & DIGI )";
+    customText.bootLine5            = "";
+    customText.bootLine6            = "";
+    customText.bootLine7            = "  CA2RXU  {version}";
+    customText.listeningText        = "     listening...";
+    customText.aprsIsAuthSoftware   = "CA2RXUiGate";
+    customText.queryResponseId      = "CA2RXU_LoRa_iGate";
+    customText.syslogIdentifier     = "CA2RXU_LoRa_iGate_";
+    customText.wifiHostnamePrefix   = "iGATE-";
+    customText.epaperInitText       = "LoRa APRS iGate Initialising...";
+    customText.showVersion          = true;
+    customText.showCallsign         = true;
+    customText.showDate             = true;
 
     rebootMode                      = false;
     rebootModeTime                  = 0;

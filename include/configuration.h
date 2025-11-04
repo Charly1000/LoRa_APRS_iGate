@@ -171,6 +171,31 @@ public:
     bool    beaconOverMqtt;
 };
 
+class CUSTOM_TEXT {
+public:
+    // Boot Display Lines (7 lines)
+    String  bootLine1;              // Default: " LoRa APRS"
+    String  bootLine2;              // Default: ""
+    String  bootLine3;              // Default: ""
+    String  bootLine4;              // Default: "   ( iGATE & DIGI )"
+    String  bootLine5;              // Default: ""
+    String  bootLine6;              // Default: ""
+    String  bootLine7;              // Default: "  CA2RXU  {version}"
+    String  listeningText;          // Default: "     listening..."
+
+    // APRS Identifiers (sent over network)
+    String  aprsIsAuthSoftware;     // Default: "CA2RXUiGate" (APRS-IS login)
+    String  queryResponseId;        // Default: "CA2RXU_LoRa_iGate" (?APRS query)
+    String  syslogIdentifier;       // Default: "CA2RXU_LoRa_iGate_" (Syslog)
+    String  wifiHostnamePrefix;     // Default: "iGATE-" (WiFi name)
+    String  epaperInitText;         // Default: "LoRa APRS iGate Initialising..."
+
+    // Placeholder Options (enable/disable replacement)
+    bool    showVersion;            // Default: true (replace {version})
+    bool    showCallsign;           // Default: true (replace {callsign})
+    bool    showDate;               // Default: true (replace {date})
+};
+
 class Configuration {
 public:
     String                  callsign;
@@ -193,9 +218,10 @@ public:
     TNC                     tnc;  
     OTA                     ota;
     WEBADMIN                webadmin;
-    NTP                     ntp;    
+    NTP                     ntp;
     REMOTE_MANAGEMENT       remoteManagement;
     MQTT                    mqtt;
+    CUSTOM_TEXT             customText;
 
     void setDefaultValues();
     bool writeFile();

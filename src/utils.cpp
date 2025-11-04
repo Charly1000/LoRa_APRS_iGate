@@ -119,12 +119,22 @@ namespace Utils {
         } else {
             Serial.println("ON / Only Serial Output)");
         }
-        displayShow(" LoRa APRS", "", "", "   ( iGATE & DIGI )", "", "" , "  CA2RXU  " + versionDate, 4000);
+
+        // Custom boot display with placeholder replacement
+        String line1 = replacePlaceholders(Config.customText.bootLine1);
+        String line2 = replacePlaceholders(Config.customText.bootLine2);
+        String line3 = replacePlaceholders(Config.customText.bootLine3);
+        String line4 = replacePlaceholders(Config.customText.bootLine4);
+        String line5 = replacePlaceholders(Config.customText.bootLine5);
+        String line6 = replacePlaceholders(Config.customText.bootLine6);
+        String line7 = replacePlaceholders(Config.customText.bootLine7);
+
+        displayShow(line1, line2, line3, line4, line5, line6, line7, 4000);
         #ifdef INTERNAL_LED_PIN
             digitalWrite(INTERNAL_LED_PIN,LOW);
         #endif
         firstLine   = Config.callsign;
-        seventhLine = "     listening...";
+        seventhLine = replacePlaceholders(Config.customText.listeningText);
     }
 
     void activeStations() {
@@ -434,6 +444,36 @@ namespace Utils {
             }
         }
         return true;
+    }
+
+    String replacePlaceholders(const String& text) {
+        String result = text;
+
+        // Replace {version} placeholder
+        if (Config.customText.showVersion && result.indexOf("{version}") >= 0) {
+            result.replace("{version}", versionDate);
+        } else if (!Config.customText.showVersion) {
+            result.replace("{version}", "");
+        }
+
+        // Replace {callsign} placeholder
+        if (Config.customText.showCallsign && result.indexOf("{callsign}") >= 0) {
+            result.replace("{callsign}", Config.callsign);
+        } else if (!Config.customText.showCallsign) {
+            result.replace("{callsign}", "");
+        }
+
+        // Replace {date} placeholder
+        if (Config.customText.showDate && result.indexOf("{date}") >= 0) {
+            // Get current date from NTP or system
+            String currentDate = versionDate; // Fallback to versionDate
+            // TODO: If you want real-time date, integrate with NTP_Utils
+            result.replace("{date}", currentDate);
+        } else if (!Config.customText.showDate) {
+            result.replace("{date}", "");
+        }
+
+        return result;
     }
 
 }

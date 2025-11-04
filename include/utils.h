@@ -46,6 +46,7 @@ namespace Utils {
     void    checkRebootTime();
     void    checkSleepByLowBatteryVoltage(uint8_t mode);
     bool    checkValidCallsign(const String& callsign);
+    String  replacePlaceholders(const String& text);
 
 }
 

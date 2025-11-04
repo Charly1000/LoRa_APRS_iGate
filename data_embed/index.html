@@ -2178,6 +2178,112 @@
                         </div>
                         <hr>
 
+                        <!-- Custom Text & Branding Section -->
+                        <div class="row my-5 d-flex align-items-top">
+                            <div class="col-lg-3 col-sm-12">
+                                <h5>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-palette-fill" viewBox="0 0 16 16">
+                                        <path d="M12.433 10.07C14.133 10.585 16 11.15 16 8a8 8 0 1 0-8 8c1.996 0 1.826-1.504 1.649-3.08-.124-1.101-.252-2.237.351-2.92.465-.527 1.42-.237 2.433.07M8 5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m4.5 3a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3M5 6.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m.5 6.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3"/>
+                                    </svg>
+                                    Custom Text & Branding
+                                </h5>
+                                <small>Customize boot screen, APRS identifiers, and all sent texts. Use placeholders {version}, {callsign}, {date}. <button type="button" class="btn btn-sm btn-outline-warning mt-2" onclick="restoreDefaultTexts()">🔄 Restore Defaults</button></small>
+                            </div>
+                            <div class="col-lg-9 col-sm-12">
+                                <!-- Boot Display Lines -->
+                                <h6 class="text-primary mt-3">📺 Boot Display (7 Lines)</h6>
+                                <div class="row g-2">
+                                    <div class="col-md-6">
+                                        <label for="customText.bootLine1" class="form-label small">Line 1</label>
+                                        <input type="text" name="customText.bootLine1" id="customText.bootLine1" class="form-control form-control-sm" placeholder=" LoRa APRS" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="customText.bootLine2" class="form-label small">Line 2</label>
+                                        <input type="text" name="customText.bootLine2" id="customText.bootLine2" class="form-control form-control-sm" placeholder="(empty)" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="customText.bootLine3" class="form-label small">Line 3</label>
+                                        <input type="text" name="customText.bootLine3" id="customText.bootLine3" class="form-control form-control-sm" placeholder="(empty)" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="customText.bootLine4" class="form-label small">Line 4</label>
+                                        <input type="text" name="customText.bootLine4" id="customText.bootLine4" class="form-control form-control-sm" placeholder="   ( iGATE & DIGI )" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="customText.bootLine5" class="form-label small">Line 5</label>
+                                        <input type="text" name="customText.bootLine5" id="customText.bootLine5" class="form-control form-control-sm" placeholder="(empty)" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="customText.bootLine6" class="form-label small">Line 6</label>
+                                        <input type="text" name="customText.bootLine6" id="customText.bootLine6" class="form-control form-control-sm" placeholder="(empty)" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="customText.bootLine7" class="form-label small">Line 7</label>
+                                        <input type="text" name="customText.bootLine7" id="customText.bootLine7" class="form-control form-control-sm" placeholder="  CA2RXU  {version}" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="customText.listeningText" class="form-label small">Listening Text</label>
+                                        <input type="text" name="customText.listeningText" id="customText.listeningText" class="form-control form-control-sm" placeholder="     listening..." />
+                                    </div>
+                                </div>
+
+                                <!-- APRS Identifiers -->
+                                <h6 class="text-success mt-4">📡 APRS Identifiers (Sent Over Network)</h6>
+                                <div class="row g-2">
+                                    <div class="col-md-6">
+                                        <label for="customText.aprsIsAuthSoftware" class="form-label small">APRS-IS Auth Software</label>
+                                        <input type="text" name="customText.aprsIsAuthSoftware" id="customText.aprsIsAuthSoftware" class="form-control form-control-sm" placeholder="CA2RXUiGate" />
+                                        <small class="text-muted">Used in APRS-IS login</small>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="customText.queryResponseId" class="form-label small">Query Response ID</label>
+                                        <input type="text" name="customText.queryResponseId" id="customText.queryResponseId" class="form-control form-control-sm" placeholder="CA2RXU_LoRa_iGate" />
+                                        <small class="text-muted">Response to ?APRS queries</small>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="customText.syslogIdentifier" class="form-label small">Syslog Identifier</label>
+                                        <input type="text" name="customText.syslogIdentifier" id="customText.syslogIdentifier" class="form-control form-control-sm" placeholder="CA2RXU_LoRa_iGate_" />
+                                        <small class="text-muted">Syslog server identifier</small>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="customText.wifiHostnamePrefix" class="form-label small">WiFi Hostname Prefix</label>
+                                        <input type="text" name="customText.wifiHostnamePrefix" id="customText.wifiHostnamePrefix" class="form-control form-control-sm" placeholder="iGATE-" />
+                                        <small class="text-muted">Network name prefix + callsign</small>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="customText.epaperInitText" class="form-label small">E-Paper Init Text</label>
+                                        <input type="text" name="customText.epaperInitText" id="customText.epaperInitText" class="form-control form-control-sm" placeholder="LoRa APRS iGate Initialising..." />
+                                        <small class="text-muted">E-Ink display boot message</small>
+                                    </div>
+                                </div>
+
+                                <!-- Placeholder Options -->
+                                <h6 class="text-warning mt-4">⚙️ Placeholder Options</h6>
+                                <div class="row g-2">
+                                    <div class="col-md-4">
+                                        <div class="form-check form-switch">
+                                            <input type="checkbox" name="customText.showVersion" id="customText.showVersion" class="form-check-input" />
+                                            <label for="customText.showVersion" class="form-label">Show {version}</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-check form-switch">
+                                            <input type="checkbox" name="customText.showCallsign" id="customText.showCallsign" class="form-check-input" />
+                                            <label for="customText.showCallsign" class="form-label">Show {callsign}</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-check form-switch">
+                                            <input type="checkbox" name="customText.showDate" id="customText.showDate" class="form-check-input" />
+                                            <label for="customText.showDate" class="form-label">Show {date}</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <small class="text-muted d-block mt-2">💡 Uncheck to hide placeholders from sent texts. Placeholders are replaced with actual values when enabled.</small>
+                            </div>
+                        </div>
+                        <hr>
+
                         <div class="row my-5 d-flex align-items-top">
                             <div class="col-lg-3 col-sm-12">
                                 <h5>
@@ -2356,6 +2462,39 @@
                 <div class="toast-body text-center"></div>
             </div>
         </div>
+
+        <!-- Restore Defaults Function for Custom Text -->
+        <script>
+        function restoreDefaultTexts() {
+            if (!confirm('Restore all custom texts to default values? Click Save after to apply.')) {
+                return;
+            }
+
+            // Boot Display defaults
+            document.getElementById('customText.bootLine1').value = ' LoRa APRS';
+            document.getElementById('customText.bootLine2').value = '';
+            document.getElementById('customText.bootLine3').value = '';
+            document.getElementById('customText.bootLine4').value = '   ( iGATE & DIGI )';
+            document.getElementById('customText.bootLine5').value = '';
+            document.getElementById('customText.bootLine6').value = '';
+            document.getElementById('customText.bootLine7').value = '  CA2RXU  {version}';
+            document.getElementById('customText.listeningText').value = '     listening...';
+
+            // APRS Identifiers defaults
+            document.getElementById('customText.aprsIsAuthSoftware').value = 'CA2RXUiGate';
+            document.getElementById('customText.queryResponseId').value = 'CA2RXU_LoRa_iGate';
+            document.getElementById('customText.syslogIdentifier').value = 'CA2RXU_LoRa_iGate_';
+            document.getElementById('customText.wifiHostnamePrefix').value = 'iGATE-';
+            document.getElementById('customText.epaperInitText').value = 'LoRa APRS iGate Initialising...';
+
+            // Placeholder options defaults
+            document.getElementById('customText.showVersion').checked = true;
+            document.getElementById('customText.showCallsign').checked = true;
+            document.getElementById('customText.showDate').checked = true;
+
+            alert('Defaults restored! Click Save to apply.');
+        }
+        </script>
     </body>
     <script src="/bootstrap.js"></script>
     <script src="/script.js"></script>
