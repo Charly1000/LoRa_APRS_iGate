@@ -36,6 +36,15 @@ namespace WX_Utils {
     String  generatePresString(const float sensorPres);
     String  readDataSensor();
 
+    // Thread-safe sensor management (from wx_utils_safe/with_airquality)
+    void    checkSensorHealth();
+    String  getSensorStatusJSON();
+    void    resetSensor();
+
+    // Air quality functions (BME680 only)
+    String  getAirQualityForBeacon();      // Returns "AQ:95%" or empty
+    String  getAirQualityStatsJSON();      // Returns JSON stats for web API
+
 }
 
 #endif
