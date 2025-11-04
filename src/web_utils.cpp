@@ -238,6 +238,14 @@ namespace WEB_Utils {
             Config.wxsensor.heightCorrection        = getParamIntSafe("wxsensor.heightCorrection", Config.wxsensor.heightCorrection);
             Config.wxsensor.temperatureCorrection   = getParamFloatSafe("wxsensor.temperatureCorrection", Config.wxsensor.temperatureCorrection);
             Config.beacon.symbol = "_";
+
+            // Air Quality Calibration (BME680)
+            Config.wxsensor.airQuality.excellentThreshold  = getParamFloatSafe("wxsensor.airQuality.excellentThreshold", Config.wxsensor.airQuality.excellentThreshold);
+            Config.wxsensor.airQuality.goodThreshold       = getParamFloatSafe("wxsensor.airQuality.goodThreshold", Config.wxsensor.airQuality.goodThreshold);
+            Config.wxsensor.airQuality.moderateThreshold   = getParamFloatSafe("wxsensor.airQuality.moderateThreshold", Config.wxsensor.airQuality.moderateThreshold);
+            Config.wxsensor.airQuality.poorThreshold       = getParamFloatSafe("wxsensor.airQuality.poorThreshold", Config.wxsensor.airQuality.poorThreshold);
+            Config.wxsensor.airQuality.badThreshold        = getParamFloatSafe("wxsensor.airQuality.badThreshold", Config.wxsensor.airQuality.badThreshold);
+            Config.wxsensor.airQuality.worstThreshold      = getParamFloatSafe("wxsensor.airQuality.worstThreshold", Config.wxsensor.airQuality.worstThreshold);
         }
 
 

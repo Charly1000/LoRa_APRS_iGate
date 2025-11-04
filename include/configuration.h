@@ -108,6 +108,16 @@ public:
     bool    active;
     int     heightCorrection;
     float   temperatureCorrection;
+
+    // Air Quality Calibration (BME680 only)
+    struct {
+        float   excellentThreshold;     // kOhm for 100% quality (default: 150.0)
+        float   goodThreshold;           // kOhm for 80% quality (default: 80.0)
+        float   moderateThreshold;       // kOhm for 60% quality (default: 40.0)
+        float   poorThreshold;           // kOhm for 40% quality (default: 20.0)
+        float   badThreshold;            // kOhm for 20% quality (default: 10.0)
+        float   worstThreshold;          // kOhm for 1% quality (default: 2.0)
+    } airQuality;
 };
 
 class SYSLOG {

@@ -469,8 +469,16 @@ namespace WX_Utils {
                                 newHum = bme680.humidity;
                                 newGas = bme680.gas_resistance / 1000.0;  // kOhm
 
-                                // ✅ NEW: Calculate air quality percentage
-                                uint8_t airQuality = AirQuality::calculateAirQualityPercent(newGas);
+                                // ✅ NEW: Calculate air quality percentage with config calibration
+                                AirQuality::Calibration configCalibration = {
+                                    .excellentThreshold = Config.wxsensor.airQuality.excellentThreshold,
+                                    .goodThreshold = Config.wxsensor.airQuality.goodThreshold,
+                                    .moderateThreshold = Config.wxsensor.airQuality.moderateThreshold,
+                                    .poorThreshold = Config.wxsensor.airQuality.poorThreshold,
+                                    .badThreshold = Config.wxsensor.airQuality.badThreshold,
+                                    .worstThreshold = Config.wxsensor.airQuality.worstThreshold
+                                };
+                                uint8_t airQuality = AirQuality::calculateAirQualityPercent(newGas, &configCalibration);
 
                                 // Update statistics
                                 airQualityStats.update(airQuality);

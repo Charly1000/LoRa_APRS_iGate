@@ -116,6 +116,14 @@ bool Configuration::writeFile() {
         data["wxsensor"]["heightCorrection"]        = wxsensor.heightCorrection;
         data["wxsensor"]["temperatureCorrection"]   = wxsensor.temperatureCorrection;
 
+        // Air Quality Calibration (BME680)
+        data["wxsensor"]["airQuality"]["excellentThreshold"]  = wxsensor.airQuality.excellentThreshold;
+        data["wxsensor"]["airQuality"]["goodThreshold"]       = wxsensor.airQuality.goodThreshold;
+        data["wxsensor"]["airQuality"]["moderateThreshold"]   = wxsensor.airQuality.moderateThreshold;
+        data["wxsensor"]["airQuality"]["poorThreshold"]       = wxsensor.airQuality.poorThreshold;
+        data["wxsensor"]["airQuality"]["badThreshold"]        = wxsensor.airQuality.badThreshold;
+        data["wxsensor"]["airQuality"]["worstThreshold"]      = wxsensor.airQuality.worstThreshold;
+
         data["syslog"]["active"]                    = syslog.active;
         data["syslog"]["server"]                    = syslog.server;
         data["syslog"]["port"]                      = syslog.port;
@@ -303,6 +311,20 @@ bool Configuration::readFile() {
         wxsensor.heightCorrection       = data["wxsensor"]["heightCorrection"] | 0;
         wxsensor.temperatureCorrection  = data["wxsensor"]["temperatureCorrection"] | 0.0;
 
+        // Air Quality Calibration (BME680) - Load with defaults
+        if (!data["wxsensor"]["airQuality"].containsKey("excellentThreshold") ||
+            !data["wxsensor"]["airQuality"].containsKey("goodThreshold") ||
+            !data["wxsensor"]["airQuality"].containsKey("moderateThreshold") ||
+            !data["wxsensor"]["airQuality"].containsKey("poorThreshold") ||
+            !data["wxsensor"]["airQuality"].containsKey("badThreshold") ||
+            !data["wxsensor"]["airQuality"].containsKey("worstThreshold")) needsRewrite = true;
+        wxsensor.airQuality.excellentThreshold  = data["wxsensor"]["airQuality"]["excellentThreshold"] | 150.0;
+        wxsensor.airQuality.goodThreshold       = data["wxsensor"]["airQuality"]["goodThreshold"] | 80.0;
+        wxsensor.airQuality.moderateThreshold   = data["wxsensor"]["airQuality"]["moderateThreshold"] | 40.0;
+        wxsensor.airQuality.poorThreshold       = data["wxsensor"]["airQuality"]["poorThreshold"] | 20.0;
+        wxsensor.airQuality.badThreshold        = data["wxsensor"]["airQuality"]["badThreshold"] | 10.0;
+        wxsensor.airQuality.worstThreshold      = data["wxsensor"]["airQuality"]["worstThreshold"] | 2.0;
+
         if (!data["syslog"].containsKey("active") ||
             !data["syslog"].containsKey("server") ||
             !data["syslog"].containsKey("port") ||
@@ -463,6 +485,14 @@ void Configuration::setDefaultValues() {
     wxsensor.active                 = false;
     wxsensor.heightCorrection       = 0;
     wxsensor.temperatureCorrection  = 0.0;
+
+    // Air Quality Calibration defaults (BME680)
+    wxsensor.airQuality.excellentThreshold  = 150.0;
+    wxsensor.airQuality.goodThreshold       = 80.0;
+    wxsensor.airQuality.moderateThreshold   = 40.0;
+    wxsensor.airQuality.poorThreshold       = 20.0;
+    wxsensor.airQuality.badThreshold        = 10.0;
+    wxsensor.airQuality.worstThreshold      = 2.0;
 
     syslog.active                   = false;
     syslog.server                   = "lora.link9.net";
