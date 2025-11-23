@@ -67,7 +67,15 @@
     "wxsensor": {
         "active": false,
         "heightCorrection": 0,
-        "temperatureCorrection": 0.0
+        "temperatureCorrection": 0.0,
+        "airQuality": {
+            "excellentThreshold": 150,
+            "goodThreshold": 80,
+            "moderateThreshold": 40,
+            "poorThreshold": 20,
+            "badThreshold": 10,
+            "worstThreshold": 2
+        }
 	},
     "syslog": {
         "active": false,
@@ -104,6 +112,24 @@
     "ntp": {
         "server": "pool.ntp.org",
         "gmtCorrection": 0.0
+    },
+    "customText": {
+        "bootLine1": " LoRa APRS",
+        "bootLine2": "",
+        "bootLine3": "",
+        "bootLine4": "   ( iGATE & DIGI )",
+        "bootLine5": "",
+        "bootLine6": "",
+        "bootLine7": "  CA2RXU  {version}",
+        "listeningText": "     listening...",
+        "aprsIsAuthSoftware": "CA2RXUiGate",
+        "queryResponseId": "CA2RXU_LoRa_iGate",
+        "syslogIdentifier": "CA2RXU_LoRa_iGate_",
+        "wifiHostnamePrefix": "iGATE-",
+        "epaperInitText": "LoRa APRS iGate Initialising...",
+        "showVersion": true,
+        "showCallsign": true,
+        "showDate": true
     },
     "other": {
         "rememberStationTime": 30,
