@@ -32,6 +32,10 @@ extern const char web_index_html[] asm("_binary_data_embed_index_html_gz_start")
 extern const char web_index_html_end[] asm("_binary_data_embed_index_html_gz_end");
 extern const size_t web_index_html_len = web_index_html_end - web_index_html;
 
+extern const char web_admin_html[] asm("_binary_data_embed_admin_html_gz_start");
+extern const char web_admin_html_end[] asm("_binary_data_embed_admin_html_gz_end");
+extern const size_t web_admin_html_len = web_admin_html_end - web_admin_html;
+
 extern const char web_style_css[] asm("_binary_data_embed_style_css_gz_start");
 extern const char web_style_css_end[] asm("_binary_data_embed_style_css_gz_end");
 extern const size_t web_style_css_len = web_style_css_end - web_style_css;
@@ -73,6 +77,15 @@ namespace WEB_Utils {
             return request->requestAuthentication();
 
         AsyncWebServerResponse *response = request->beginResponse(200, "text/html", (const uint8_t*)web_index_html, web_index_html_len);
+        response->addHeader("Content-Encoding", "gzip");
+        request->send(response);
+    }
+
+    void handleAdmin(AsyncWebServerRequest *request) {
+        if(Config.webadmin.active && !request->authenticate(Config.webadmin.username.c_str(), Config.webadmin.password.c_str()))
+            return request->requestAuthentication();
+
+        AsyncWebServerResponse *response = request->beginResponse(200, "text/html", (const uint8_t*)web_admin_html, web_admin_html_len);
         response->addHeader("Content-Encoding", "gzip");
         request->send(response);
     }
@@ -382,6 +395,7 @@ namespace WEB_Utils {
     void setup() {
         if (Config.digi.ecoMode == 0) {
             server.on("/", HTTP_GET, handleHome);
+            server.on("/admin.html", HTTP_GET, handleAdmin);
             server.on("/status", HTTP_GET, handleStatus);
             server.on("/received-packets.json", HTTP_GET, handleReceivedPackets);
             server.on("/configuration.json", HTTP_GET, handleReadConfiguration);
