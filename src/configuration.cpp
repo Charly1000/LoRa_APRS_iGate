@@ -442,7 +442,15 @@ bool Configuration::readFile() {
             writeFile();
             delay(1000);
             ESP.restart();
-        } 
+        }
+
+        // IMPORTANT: If customText section doesn't exist at all in the config file,
+        // write it now with default values so it appears in the web interface
+        if (!data.containsKey("customText")) {
+            Serial.println("[Config] customText section missing - initializing with defaults");
+            writeFile();
+        }
+
         Serial.println("Config read successfuly");
         return true;
     } else {
