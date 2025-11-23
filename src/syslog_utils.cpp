@@ -21,6 +21,7 @@
 #include "configuration.h"
 #include "syslog_utils.h"
 #include "gps_utils.h"
+#include "utils.h"
 
 
 extern Configuration    Config;

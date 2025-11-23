@@ -21,6 +21,7 @@
 #include "station_utils.h"
 #include "query_utils.h"
 #include "lora_utils.h"
+#include "utils.h"
 
 
 extern Configuration                    Config;
