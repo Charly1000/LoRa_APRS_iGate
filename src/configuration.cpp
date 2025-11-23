@@ -330,18 +330,17 @@ bool Configuration::readFile() {
         wxsensor.temperatureCorrection  = data["wxsensor"]["temperatureCorrection"] | 0.0;
 
         // Air Quality Calibration (BME680) - Load with defaults
-        if (!data["wxsensor"]["airQuality"].containsKey("excellentThreshold") ||
-            !data["wxsensor"]["airQuality"].containsKey("goodThreshold") ||
-            !data["wxsensor"]["airQuality"].containsKey("moderateThreshold") ||
-            !data["wxsensor"]["airQuality"].containsKey("poorThreshold") ||
-            !data["wxsensor"]["airQuality"].containsKey("badThreshold") ||
-            !data["wxsensor"]["airQuality"].containsKey("worstThreshold")) needsRewrite = true;
+        // Air Quality Calibration (OPTIONAL - no rewrite needed)
+        // If old config doesn't have these fields, just use defaults silently
         wxsensor.airQuality.excellentThreshold  = data["wxsensor"]["airQuality"]["excellentThreshold"] | 150.0;
         wxsensor.airQuality.goodThreshold       = data["wxsensor"]["airQuality"]["goodThreshold"] | 80.0;
         wxsensor.airQuality.moderateThreshold   = data["wxsensor"]["airQuality"]["moderateThreshold"] | 40.0;
         wxsensor.airQuality.poorThreshold       = data["wxsensor"]["airQuality"]["poorThreshold"] | 20.0;
         wxsensor.airQuality.badThreshold        = data["wxsensor"]["airQuality"]["badThreshold"] | 10.0;
         wxsensor.airQuality.worstThreshold      = data["wxsensor"]["airQuality"]["worstThreshold"] | 2.0;
+
+        // Note: We don't set needsRewrite for airQuality to avoid forcing config rewrite
+        // These fields will be saved when user modifies config via web interface
 
         if (!data["syslog"].containsKey("active") ||
             !data["syslog"].containsKey("server") ||
@@ -396,23 +395,8 @@ bool Configuration::readFile() {
         ntp.server                      = data["ntp"]["server"] | "pool.ntp.org";
         ntp.gmtCorrection               = data["ntp"]["gmtCorrection"] | 0.0;
 
-        // Custom Text & Branding - Load with defaults
-        if (!data["customText"].containsKey("bootLine1") ||
-            !data["customText"].containsKey("bootLine2") ||
-            !data["customText"].containsKey("bootLine3") ||
-            !data["customText"].containsKey("bootLine4") ||
-            !data["customText"].containsKey("bootLine5") ||
-            !data["customText"].containsKey("bootLine6") ||
-            !data["customText"].containsKey("bootLine7") ||
-            !data["customText"].containsKey("listeningText") ||
-            !data["customText"].containsKey("aprsIsAuthSoftware") ||
-            !data["customText"].containsKey("queryResponseId") ||
-            !data["customText"].containsKey("syslogIdentifier") ||
-            !data["customText"].containsKey("wifiHostnamePrefix") ||
-            !data["customText"].containsKey("epaperInitText") ||
-            !data["customText"].containsKey("showVersion") ||
-            !data["customText"].containsKey("showCallsign") ||
-            !data["customText"].containsKey("showDate")) needsRewrite = true;
+        // Custom Text & Branding - Load with defaults (OPTIONAL - no rewrite needed)
+        // If old config doesn't have these fields, just use defaults silently
         customText.bootLine1            = data["customText"]["bootLine1"] | " LoRa APRS";
         customText.bootLine2            = data["customText"]["bootLine2"] | "";
         customText.bootLine3            = data["customText"]["bootLine3"] | "";
@@ -429,6 +413,9 @@ bool Configuration::readFile() {
         customText.showVersion          = data["customText"]["showVersion"] | true;
         customText.showCallsign         = data["customText"]["showCallsign"] | true;
         customText.showDate             = data["customText"]["showDate"] | true;
+
+        // Note: We don't set needsRewrite for customText to avoid forcing config rewrite
+        // These fields will be saved when user modifies config via web interface
 
         if (!data["other"].containsKey("rebootMode") ||
             !data["other"].containsKey("rebootModeTime")) needsRewrite = true;
