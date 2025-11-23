@@ -22,6 +22,7 @@ Import("env")
 
 files = [
   'data_embed/index.html',
+  'data_embed/admin.html',
   'data_embed/script.js',
   'data_embed/style.css',
   'data_embed/bootstrap.js',
