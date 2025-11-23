@@ -68,6 +68,9 @@ struct SensorState {
 
 SensorState sensorState = {0, 0x00, false, false, 0, 0, 0, 0, 0, 0, 0, ""};
 
+// Global variable for backward compatibility with utils.cpp
+int wxModuleType = 0;
+
 float newHum, newTemp, newPress, newGas;
 
 // Sensor objects
@@ -178,6 +181,7 @@ namespace WX_Utils {
                                 Adafruit_BME280::SAMPLING_X1,
                                 Adafruit_BME280::FILTER_OFF);
                     sensorState.moduleType = 1;
+                    wxModuleType = 1;
                     Serial.println("[WX] ✓ BME280 initialized successfully");
                     success = true;
                 }
@@ -189,6 +193,7 @@ namespace WX_Utils {
                                 Adafruit_BME280::SAMPLING_X1,
                                 Adafruit_BME280::FILTER_OFF);
                     sensorState.moduleType = 1;
+                    wxModuleType = 1;
                     Serial.println("[WX] ✓ BME280 initialized successfully");
                     success = true;
                 }
@@ -200,6 +205,7 @@ namespace WX_Utils {
                         bme680.setPressureOversampling(BME680_OS_1X);
                         bme680.setIIRFilterSize(BME680_FILTER_SIZE_0);
                         sensorState.moduleType = 3;
+                        wxModuleType = 3;
                         Serial.println("[WX] ✓ BME680 initialized successfully");
                         success = true;
                     }
@@ -213,6 +219,7 @@ namespace WX_Utils {
                                 Adafruit_BMP280::SAMPLING_X1,
                                 Adafruit_BMP280::FILTER_OFF);
                     sensorState.moduleType = 2;
+                    wxModuleType = 2;
                     Serial.println("[WX] ✓ BMP280 initialized successfully");
                     success = true;
                 }
@@ -221,6 +228,7 @@ namespace WX_Utils {
         } else if (sensorState.moduleAddress == 0x40) {
             if (si7021.begin()) {
                 sensorState.moduleType = 4;
+                wxModuleType = 4;
                 Serial.println("[WX] ✓ Si7021 initialized successfully");
                 success = true;
             }
@@ -229,6 +237,7 @@ namespace WX_Utils {
             #ifdef LIGHTGATEWAY_PLUS_1_0
                 if (shtc3.begin()) {
                     sensorState.moduleType = 5;
+                    wxModuleType = 5;
                     Serial.println("[WX] ✓ SHTC3 initialized successfully");
                     success = true;
                 }
@@ -311,6 +320,7 @@ namespace WX_Utils {
         sensorState.isInitialized = false;
         sensorState.isHealthy = false;
         sensorState.moduleType = 0;
+        wxModuleType = 0;
         sensorState.moduleAddress = 0x00;
 
         // Re-scan and re-initialize
