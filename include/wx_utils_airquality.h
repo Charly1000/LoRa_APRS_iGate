@@ -217,10 +217,7 @@ namespace AirQuality {
             return calculateAirQualityPercent(gasResistanceKOhm);
         }
 
-        // Normalize to baseline
-        float ratio = gasResistanceKOhm / baselineKOhm;
-
-        // Adjust thresholds proportionally
+        // Adjust thresholds proportionally to baseline
         Calibration adjusted = DEFAULT_CALIBRATION;
         adjusted.excellentThreshold = baselineKOhm * 1.0;   // 100% of baseline
         adjusted.goodThreshold = baselineKOhm * 0.6;        // 60% of baseline

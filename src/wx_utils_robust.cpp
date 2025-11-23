@@ -332,7 +332,7 @@ namespace WX_Utils {
             // Initialized but unhealthy
             if (sensorState.consecutiveFailures >= MAX_CONSECUTIVE_FAILURES) {
                 if (now - sensorState.lastRecoveryAttempt > RECOVERY_ATTEMPT_INTERVAL) {
-                    Serial.printf("[WX] Attempting recovery after %lu failures\n",
+                    Serial.printf("[WX] Attempting recovery after %u failures\n",
                                  sensorState.consecutiveFailures);
                     shouldRecover = true;
                 }
@@ -527,7 +527,7 @@ namespace WX_Utils {
             sensorState.consecutiveFailures++;
             sensorState.lastError = "Read failed or NaN data";
 
-            Serial.printf("[WX] ✗ Sensor read failed (consecutive: %lu)\n",
+            Serial.printf("[WX] ✗ Sensor read failed (consecutive: %u)\n",
                          sensorState.consecutiveFailures);
 
             if (sensorState.consecutiveFailures >= MAX_CONSECUTIVE_FAILURES) {
